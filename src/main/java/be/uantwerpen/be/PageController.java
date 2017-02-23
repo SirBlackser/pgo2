@@ -17,4 +17,10 @@ public class PageController {
     {
         return "DJHomePage";
     }
+
+    @RequestMapping({"/test"})
+    public String test() {return "TestPage";}
+
+    @RequestMapping({"/test1"})
+    public String test1() {return "TestPage1";}
 }
