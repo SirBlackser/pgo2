@@ -1,12 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="NavBar :: head (pageTitle='Graphs')">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="NavBar :: head (pageTitle='Music')">
     <meta charset="UTF-8"/>
     <title>MusicPage</title>
 </head>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
 
-<body>
-    <div th:replace="NavBar :: navbar"></div>
-    <div class="textBox">Hello world</div>
-</body>
+    <body onload="initPage()">
+        <script type="text/javascript">
+            function initPage(){
+                var options = {
+                    valueNames: [ 'songName', 'artist']
+                };
+                var songList = new List('myTable', options);
+            }
+        </script>
+        <div class="container">
+            <div th:replace="NavBar :: navbar"></div>
+            <div class="content">
+                <div id="myTable">
+                    <input class="search" placeholder="Search" />
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Song name</th>
+                                <th>Artist</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                        <tr th:each="Song : ${allSongs}">
+                        <!--Song.usedInTestPlan==0 geen delete en view ipv edit-->
+                        <td class="songName" th:value="${Song}" th:text="${Song.songName}">Name</td>
+                        <td class="artist" th:value="${Song}" th:text="${Song.artist}">Artist</td>
+                        <td>
+                            <!--testTemplates.usedInTestPlan==0 geen delete en view ipv edit-->
+                            <a th:if="${Song.songName} !=  0"><span class="glyphicon glyphicon-play"></span></a>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
