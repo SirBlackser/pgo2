@@ -1,7 +1,5 @@
-package be.uantwerpen.be;
+package be.uantwerpen.Controller;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class PageController {
-    @RequestMapping({"/"})
+public class GraphController {
+    @RequestMapping({"/Graphs"})
     public String showHomepage(ModelMap model)
     {
-        return "DJHomePage";
+        return "GraphPage";
     }
 
     @RequestMapping({"/test"})
