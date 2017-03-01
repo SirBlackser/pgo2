@@ -23,7 +23,7 @@ public class MqttJavaApplication {
                         .web(false)
                         .run(args);
         MyGateway gateway = context.getBean(MyGateway.class);
-        gateway.sendToMqtt("foo");
+        gateway.sendToMqtt("00#%Title#%Artist#%Album#%Year");
     }
 
     @Bean
@@ -41,7 +41,8 @@ public class MqttJavaApplication {
         MqttPahoMessageHandler messageHandler =
                 new MqttPahoMessageHandler("tcp://143.129.39.118:1883", "id", mqttClientFactory());
         //messageHandler.setAsync(true);
-        messageHandler.setDefaultTopic("testTopic");
+        messageHandler.setDefaultTopic("songInformation");
+        messageHandler.setDefaultRetained(true);
         return messageHandler;
     }
 

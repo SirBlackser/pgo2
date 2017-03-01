@@ -15,7 +15,7 @@ import org.springframework.messaging.*;
 /**
  * Created by Kevin on 23/02/2017.
  */
-@SpringBootApplication
+/*@SpringBootApplication
 public class MqttToBroker {
 
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class MqttToBroker {
     @Bean
     public MessageProducer inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("tcp://localhost:8080", "testClient",
+                new MqttPahoMessageDrivenChannelAdapter("tcp://127.0.0.1:8080", "testClient",
                         "topic1", "topic2");
        // adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
@@ -54,4 +54,4 @@ public class MqttToBroker {
         };
     }
 
-}
+}*/
