@@ -29,7 +29,7 @@ public class MqttToBroker {
         return new DirectChannel();
     }
 
-    @Bean
+  /*  @Bean
     public MessageProducer inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
                 new MqttPahoMessageDrivenChannelAdapter("tcp://127.0.0.1:8080", "testClient",
@@ -38,12 +38,12 @@ public class MqttToBroker {
         adapter.setConverter(new DefaultPahoMessageConverter());
        // adapter.setQos(1);
         adapter.setOutputChannel(mqttInputChannel());
-        return adapter;
-    }
+        return adapter;*/
+    //}
 
-    @Bean
-    @ServiceActivator(inputChannel = "mqttInputChannel")
-    public MessageHandler handler() {
+ //   @Bean
+ //   @ServiceActivator(inputChannel = "mqttInputChannel")
+ /*   public MessageHandler handler() {
         return new MessageHandler() {
 
            // @Override
