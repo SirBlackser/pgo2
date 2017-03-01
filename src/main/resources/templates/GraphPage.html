@@ -1,11 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="NavBar :: head (pageTitle='Graphs')">
-    <meta charset="UTF-8"/>
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<head>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <title>GraphPage</title>
+
 </head>
-<body>
-    <div th:replace="NavBar :: navbar"></div>
-    <div>Hello world back</div>
+<body onload="initPage()">
+<input type="button" id="graph" value="show graph"/>
+<script>
+    function initPage() {
+        var upData = [];
+        var downData = [];
+
+        $.ajaxSetup({cache: false});
+
+        $.getJSON("https://api.myjson.com/bins/d1075", function (data) {
+
+
+            /* loop through array */
+            $.each(data, function (index, d) {
+                upData.push(d.upvotes);
+                downData.push(d.downvotes);
+            });
+        });
+        $(document).ready(function () {
+            $("#graph").click(function () {
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'plus/minus rating per timestamp'
+                    },
+                    subtitle: {
+                        text: 'Source: Ignis database'
+                    },
+                    xAxis: {
+                        categories: ['0 - 60 sec', '61-120 sec', '121-180 sec', '181-240 sec', '241-300 sec', 'total votes cast']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'total amount of votes'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+
+                    series: [{
+                        name: 'Up',
+                        data: upData
+                    }, {
+                        name: 'Down',
+                        data: downData
+                    }]
+                });
+            });
+        });
+    }
+
+
+</script>
 </body>
 </html>
