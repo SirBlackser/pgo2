@@ -39,7 +39,7 @@ public class MqttJavaApplication {
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MqttPahoMessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler =
-                new MqttPahoMessageHandler("tcp://host1:1883", "id", mqttClientFactory());
+                new MqttPahoMessageHandler("tcp://143.129.39.118:1883", "id", mqttClientFactory());
         //messageHandler.setAsync(true);
         messageHandler.setDefaultTopic("testTopic");
         return messageHandler;
