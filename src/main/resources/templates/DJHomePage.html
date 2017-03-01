@@ -1,21 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="NavBar :: head (pageTitle='Music')">
     <meta charset="UTF-8"/>
     <title>MusicPage</title>
 </head>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
-
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
-          rel="stylesheet" media="screen" />
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/multiselect.css}" />
-    <script type="text/javascript" src="/js/list.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.multi-select.js"></script>
 </head>
 
     <body onload="initPage()">
@@ -28,6 +18,7 @@
             }
         </script>
         <div class="container">
+            <div th:replace="NavBar :: navbar"></div>
             <div class="content">
                 <div id="myTable">
                     <input class="search" placeholder="Search" />
@@ -70,8 +61,8 @@
             document.getElementById("table").innerHTML = txt;
         }
     };
-    xmlhttp.open("GET", "http://143.129.39.150:8080/DJAppServer_war/info/yolo", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.open("GET", "DJAppServer_war/info/yolo", true);
+    xmlhttp.setRequestHeader("Content-type", "application/JSON");
     xmlhttp.send();
     /*]]>*/
 </script>
