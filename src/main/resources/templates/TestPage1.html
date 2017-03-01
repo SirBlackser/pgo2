@@ -35,19 +35,18 @@
     $(document).ready(function(e) {
 
         var data1 = [
-            { field1: 'value a1', field2: 'value a2', field3: 'value a3', field4: 'value a4' },
-            { field1: 'value b1', field2: 'value b2', field3: 'value b3', field4: 'value b4' },
-            { field1: 'value c1', field2: 'value c2', field3: 'value c3', field4: 'value c4' }
+            { "id": 1, "title": "value a2", "artist": "value a3"},
+            { "id": 2, "title": "value b2", "artist": "value b3"},
+            { "id": 1, "title": "value c2", "artist": "value c3"}
         ];
 
         var data2 = [
-            { field1: 'new value a1', field2: 'new value a2', field3: 'new value a3' },
-            { field1: 'new value b1', field2: 'new value b2', field3: 'new value b3' },
-            { field1: 'new value c1', field2: 'new value c2', field3: 'new value c3' }
+            { "id": 1, "title": "nvalue a2", "artist": "nvalue a3"},
+            { "id": 2, "title": "nvalue b2", "artist": "nvalue b3"},
+            { "id": 1, "title": "nvalue c2", "artist": "nvalue c3"}
         ];
 
         function loadTable(tableId, fields, data) {
-            //$('#' + tableId).empty(); //not really necessary
             var rows = '';
             $.each(data, function(index, item) {
                 var row = '<tr>';
@@ -59,10 +58,10 @@
             $('#' + tableId + ' tbody').html(rows);
         }
 
-        loadTable('data-table', ['field2', 'field1', 'field3'], data1);
+        loadTable('data-table', ['id', 'title', 'artist'], data1);
 
         $('#btn-update').click(function(e) {
-            loadTable('data-table', ['field2', 'field1', 'field3'], data2);
+            loadTable('data-table', ['id', 'title', 'artist'], data2);
         });
 
     });

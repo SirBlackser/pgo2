@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="NavBar :: head (pageTitle='Graphs')">
+<head>
     <meta charset="UTF-8"/>
     <title>GraphPage</title>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/multiselect.css}" />
+    <script type="text/javascript" src="/js/list.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.multi-select.js"></script>
 </head>
 <body>
-    <div th:replace="NavBar :: navbar"></div>
     <div>Hello world back</div>
 </body>
 </html>

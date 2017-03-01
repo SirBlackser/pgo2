@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="NavBar :: head (pageTitle='Music')">
+<head>
     <meta charset="UTF-8"/>
     <title>MusicPage</title>
 </head>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/multiselect.css}" />
+    <script type="text/javascript" src="/js/list.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.multi-select.js"></script>
 </head>
 
     <body onload="initPage()">
@@ -18,31 +28,51 @@
             }
         </script>
         <div class="container">
-            <div th:replace="NavBar :: navbar"></div>
             <div class="content">
                 <div id="myTable">
                     <input class="search" placeholder="Search" />
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Song name</th>
-                                <th>Artist</th>
-                            </tr>
-                        </thead>
-                        <tbody class="list">
-                        <tr th:each="Song : ${allSongs}">
-                        <!--Song.usedInTestPlan==0 geen delete en view ipv edit-->
-                        <td class="songName" th:value="${Song}" th:text="${Song.songName}">Name</td>
-                        <td class="artist" th:value="${Song}" th:text="${Song.artist}">Artist</td>
-                        <td>
-                            <!--testTemplates.usedInTestPlan==0 geen delete en view ipv edit-->
-                            <a th:if="${Song.songName} !=  0"><span class="glyphicon glyphicon-play"></span></a>
-                        </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <p id="table"></p>
                 </div>
             </div>
         </div>
     </body>
+
+<script>
+    /*<![CDATA[*/
+    var xmlhttp, myObj, x, txt = "";
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myObj = JSON.parse(this.responseText);
+            txt += "<table class=\"table table-hover\">"
+            txt += "<thead>"
+            txt += "<tr>";
+            txt += "<td>" + "id" + "</td>";
+            txt += "<td>" + "title" + "</td>";
+            txt += "<td>" + "artist" + "</td>";
+            txt += "<td>" + "year" + "</td>";
+            txt += "</tr>";
+            txt += "</thead>"
+            txt += "<tbody class=\"list\">"
+            for (song in allSongs) {
+                txt += "<tr>";
+                txt += "<td>" + Song.id + "</td>";
+                txt += "<td>" + Song.song + "</td>";
+                txt += "<td>" + Song.artist + "</td>";
+                txt += "<td>" + Song.year + "</td>";
+                txt += "<td>";
+                //txt += "<button id=\"Play"+Song.id><a th:href="@{/Music/{id}(id=${Song.id})}"><span class=\"glyphicon glyphicon-play"></span></a></button>"
+                //txt += "<button id=\"Get"+Song.id><a th:href="@{/GraphPage/{id}(id=${Song.id})}"><span class=\"glyphicon glyphicon-equalizer"></span></a></button>"
+                txt += "</td>"
+            }
+            txt += "</table>"
+            txt += "</tbody>"
+            document.getElementById("table").innerHTML = txt;
+        }
+    };
+    xmlhttp.open("GET", "http://143.129.39.150:8080/DJAppServer_war/info/yolo", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+    /*]]>*/
+</script>
 </html>

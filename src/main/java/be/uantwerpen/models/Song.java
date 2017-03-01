@@ -4,21 +4,31 @@ package be.uantwerpen.models;
  * Created by dries on 25/02/2017.
  */
 public class Song {
-    private String songName;
+    private int IDmarker;
+    private String title;
     private String artist;
 
-    public Song(String songName, String artist)
+    public Song(int IDmarker, String title, String artist)
     {
-        this.songName = songName;
+        this.IDmarker = IDmarker;
+        this.title = title;
         this.artist = artist;
     }
 
-    public String getSongName() {
-        return songName;
+    public int getIDmarker() {
+        return IDmarker;
     }
 
-    public void setSongName(String songName) {
-        this.songName = songName;
+    public void setIDmarker(int IDmarker) {
+        this.IDmarker = IDmarker;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getArtist() {
