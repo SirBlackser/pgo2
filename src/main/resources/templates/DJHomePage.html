@@ -8,14 +8,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
-    <body onload="initPage()">
+    <body onload="getSongs()">
         <script type="text/javascript">
+            /*<![CDATA[*/
+            var songs = [];
+
+            function getSongs() {
+                //var url = "http://143.129.39.150:8080/DJAppServer_war/info/yolo";
+                var url = "http://localhost:1308/getMusic";
+                $.ajax({
+                    url: url
+                }).then(function(data) {
+                    songs = data;
+                    initPage();
+                });
+            }
+
             function initPage(){
-                var options = {
+                for (var i = 0; i < songs.length; i++) {
+                    var tr = "<tr>";
+                    /* Must not forget the $ sign */
+
+                    tr += "<td>" + songs[i].songName + "</td>"
+                        + "<td>" + songs[i].artist + "</td>"
+                        + "<td>"  + "<button id=\"song\" + songs[i].songName><a th:if=\"${songs[i].songName} !=  0\"><span class=\"glyphicon glyphicon-play\"></span></a></button>" + "<td>"
+                        + "<td>"  + "<button id=\"grap\" + songs[i].songName><a th:if=\"${songs[i].songName} !=  0\"><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "<td>"
+                        + "</tr>";
+
+                    /*tr += "<td>" + obj[i].id.toString() + "</td>"
+                        + "<td>$" + obj[i].artist + "</td>"
+                        + "<td>$" + obj[i].song + "</td>"
+                        + "<td>$" + obj[i].year + "</td>"
+                        + "</tr>";*/
+
+
+                    /* We add the table row to the table body */
+                    var tbody = document.getElementById('tableBody');
+                    tbody.innerHTML += tr;
+                }
+
+                /*var options = {
                     valueNames: [ 'songName', 'artist']
                 };
-                var songList = new List('myTable', options);
+                var songList = new List('myTable', options);*/
             }
+            /*]]>*/
         </script>
         <div class="container">
             <div th:replace="NavBar :: navbar"></div>
@@ -25,20 +62,14 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Song name</th>
+                                <!--<th>ID</th>-->
                                 <th>Artist</th>
+                                <th>SongName</th>
+                                <!--<th>Year</th>-->
                             </tr>
                         </thead>
-                        <tbody class="list">
-                        <tr th:each="Song : ${allSongs}">
-                        <!--Song.usedInTestPlan==0 geen delete en view ipv edit-->
-                        <td class="songName" th:value="${Song}" th:text="${Song.songName}">Name</td>
-                        <td class="artist" th:value="${Song}" th:text="${Song.artist}">Artist</td>
-                        <td>
-                            <!--testTemplates.usedInTestPlan==0 geen delete en view ipv edit-->
-                            <a th:if="${Song.songName} !=  0"><span class="glyphicon glyphicon-play"></span></a>
-                        </td>
-                        </tr>
+                        <tbody id="tableBody" class="list">
+
                         </tbody>
                     </table>
                 </div>
