@@ -19,6 +19,13 @@
 
         $.ajaxSetup({cache: false});
 
+        //url parsing to get right ID of song into the json request
+        var url = window.location.href;
+        var res = url.split("/");
+        var urlnew = "http://143.129.39.150:8080/DJAppServer_war/info/stat/"
+        var urlnew = urlnew.concat(res[res.length - 1]);
+
+        //mockup data as json request not possible yet
         $.getJSON("https://api.myjson.com/bins/d1075", function (data) {
 
 
