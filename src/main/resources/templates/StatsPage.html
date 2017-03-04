@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>StatsPage</title>
+
+</head>
+<body onload="initPage()">
+<input type="button" id="stats" value="press to update stats"/>
+
+<table id="data-table">
+    <thead>
+    <tr>
+        <td id='header1'>Most popular Song</td>
+        <td id='response1'></td>
+    </tr>
+    <tr>
+        <td id='header2'>Least popular Song</td>
+        <td id='response2'></td>
+    </tr>
+    <tr>
+        <td id='header11'>Most active voter</td>
+        <td id='response3'></td>
+    </tr>
+    </thead>
+</table>
+
+
+<script>
+    function initPage() {
+        var mostPopularSong = [];
+        var leastPopularSong = [];
+        var mostActiveVoter = [];
+
+        $(document).ready(function (e) {
+            $("#stats").click(function () {
+                $.ajaxSetup({cache: false});
+
+                $.getJSON("https://api.myjson.com/bins/1cp31t", function (data) {
+
+
+                    /* loop through array */
+                    $.each(data, function (index, d) {
+                        mostPopularSong.push(d.mostpopularsong);
+                        leastPopularSong.push(d.leastpopularsong);
+                        mostActiveVoter.push(d.mostactivevoter);
+                    });
+                    document.getElementById('response1').innerHTML = mostPopularSong;
+                    document.getElementById('response2').innerHTML = leastPopularSong;
+                    document.getElementById('response3').innerHTML = mostActiveVoter;
+
+                    mostPopularSong.pop();
+                    leastPopularSong.pop();
+                    mostActiveVoter.pop();
+                });
+            });
+
+        });
+    }
+
+
+</script>
+
+</body>
+</html>
