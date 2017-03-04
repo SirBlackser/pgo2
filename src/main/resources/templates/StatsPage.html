@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="NavBar :: head (pageTitle='Stats')">
+    <meta charset="UTF-8"/>
+    <title>StatsPage</title>
+</head>
 <head>
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -7,6 +11,7 @@
 
 </head>
 <body onload="initPage()">
+<div th:replace="NavBar :: navbar"></div>
 <input type="button" id="stats" value="press to update stats"/>
 
 <table id="data-table">

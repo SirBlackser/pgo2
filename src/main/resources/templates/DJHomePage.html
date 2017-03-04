@@ -9,15 +9,55 @@
 </head>
 
     <body onload="getSongs()">
+        <script>
+            function sendPlay(ident) {
+                //var url = "http://143.129.39.150:8080/DJAppServer_war/info/playsong";
+                var proxy = 'https://cors-anywhere.herokuapp.com/';
+                var myURL = 'https://api.myjson.com/bins/11fzpt';
+                $.ajax({
+                    url: 'localhost',
+                    type: 'POST',
+                    data: { json: JSON.stringify({
+                        'id': ident
+                    })},
+                    dataType: 'json'
+                });
+            }
+        </script>
+        <script>
+            function goToGraphs(id) {
+
+            }
+        </script>
         <script type="text/javascript">
             /*<![CDATA[*/
             var songs = [];
 
             function getSongs() {
                 //var url = "http://143.129.39.150:8080/DJAppServer_war/info/yolo";
-                var url = "http://localhost:1308/getMusic";
+                var proxy = 'https://cors-anywhere.herokuapp.com/';
+                var myURL = 'https://api.myjson.com/bins/11fzpt';
                 $.ajax({
-                    url: url
+                    url: proxy + myURL,
+                    method: 'GET',
+                    cache: false,
+                    /*statusCode: {
+                        200: function (response) {
+                            alert('200');
+                        },
+                        201: function (response) {
+                            alert('201');
+                        },
+                        400: function (response) {
+                            alert('400');
+                        },
+                        404: function (response) {
+                            alert('404');
+                        }
+                    },*/
+                    error: function() {
+                        console.log("error");
+                    }
                 }).then(function(data) {
                     songs = data;
                     initPage();
@@ -29,17 +69,19 @@
                     var tr = "<tr>";
                     /* Must not forget the $ sign */
 
-                    tr += "<td>" + songs[i].songName + "</td>"
+                    /*tr += "<td>" + songs[i].songName + "</td>"
                         + "<td>" + songs[i].artist + "</td>"
                         + "<td>"  + "<button id=\"song\" + songs[i].songName><a th:if=\"${songs[i].songName} !=  0\"><span class=\"glyphicon glyphicon-play\"></span></a></button>" + "<td>"
-                        + "<td>"  + "<button id=\"grap\" + songs[i].songName><a th:if=\"${songs[i].songName} !=  0\"><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "<td>"
-                        + "</tr>";
-
-                    /*tr += "<td>" + obj[i].id.toString() + "</td>"
-                        + "<td>$" + obj[i].artist + "</td>"
-                        + "<td>$" + obj[i].song + "</td>"
-                        + "<td>$" + obj[i].year + "</td>"
+                        + "<td>"  + "<button id=\"graph\" + songs[i].songName><a th:if=\"${songs[i].songName} !=  0\"><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "<td>"
                         + "</tr>";*/
+
+                    tr += "<td>" + songs[i].id.toString() + "</td>"
+                        + "<td>" + songs[i].artist + "</td>"
+                        + "<td>" + songs[i].song + "</td>"
+                        + "<td>" + songs[i].year + "</td>"
+                        + "<td>" + "<button id ="+  songs[i].id + " onclick=\"sendPlay(id)\"><a><span class=\"glyphicon glyphicon-play\"></span></a></button>" + "</td>"
+                        + "<td>" + "<button id ="+ songs[i].id +" onclick=\"goToGraphs(id)\"><a><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "</td>"
+                        + "</tr>";
 
 
                     /* We add the table row to the table body */
@@ -47,13 +89,14 @@
                     tbody.innerHTML += tr;
                 }
 
-                /*var options = {
-                    valueNames: [ 'songName', 'artist']
+                var options = {
+                    valueNames: [ 'SongName', 'Artist']
                 };
-                var songList = new List('myTable', options);*/
+                var songList = new List('myTable', options);
             }
             /*]]>*/
         </script>
+
         <div class="container">
             <div th:replace="NavBar :: navbar"></div>
             <div class="content">
@@ -62,10 +105,10 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <!--<th>ID</th>-->
+                                <th>ID</th>
                                 <th>Artist</th>
                                 <th>SongName</th>
-                                <!--<th>Year</th>-->
+                                <th>Year</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="list">
