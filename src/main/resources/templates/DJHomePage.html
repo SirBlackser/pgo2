@@ -11,11 +11,11 @@
     <body onload="getSongs()">
         <script>
             function sendPlay(ident) {
-                //var url = "http://143.129.39.150:8080/DJAppServer_war/info/playsong";
+                var url = "143.129.39.150:8080/DJAppServer_war/play/" + ident;
                 var proxy = 'https://cors-anywhere.herokuapp.com/';
                 var myURL = 'https://api.myjson.com/bins/11fzpt';
                 $.ajax({
-                    url: 'localhost',
+                    url: url,
                     type: 'POST',
                     data: { json: JSON.stringify({
                         'id': ident
@@ -34,17 +34,18 @@
             var songs = [];
 
             function getSongs() {
-                //var url = "http://143.129.39.150:8080/DJAppServer_war/info/yolo";
-                var proxy = 'https://cors-anywhere.herokuapp.com/';
-                var myURL = 'https://api.myjson.com/bins/11fzpt';
+                var url = 'http://143.129.39.150:8080/DJAppServer_war/info/songs';
+                //var proxy = 'https://cors-anywhere.herokuapp.com/';
+                //var myURL = 'https://api.myjson.com/bins/11fzpt';
                 $.ajax({
-                    url: proxy + myURL,
+                    url: url,
+                    //dataType: 'jsonp',
                     method: 'GET',
                     cache: false,
-                    /*statusCode: {
-                        200: function (response) {
+                    statusCode: {
+                        /*200: function (response) {
                             alert('200');
-                        },
+                        },*/
                         201: function (response) {
                             alert('201');
                         },
@@ -54,7 +55,7 @@
                         404: function (response) {
                             alert('404');
                         }
-                    },*/
+                    },
                     error: function() {
                         console.log("error");
                     }
