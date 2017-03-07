@@ -20,8 +20,10 @@
     function initPage() {
 
         // 1) pass ID onto server.
+        // https://143.129.39.150:8080/DJAppserver_war/stats/    + ID van liedje
         var proxy = 'https://cors-anywhere.herokuapp.com/';
-        var myURL = 'https://api.myjson.com/bins/d1075';
+        // var myURL = 'https://api.myjson.com/bins/d1075';
+        var myURL = 'https://api.myjson.com/bins/l9sm1';
         var url = window.location.href;
         var res = url.split("/");
         var id =  res.length -1;
@@ -51,7 +53,11 @@
             }
         }).then(function(data) {
             /* loop through array */
-            $.each(data, function (index, d) {
+//            $.each(data, function (index, d) {
+//                upData.push(d.upvotes);
+//                downData.push(d.downvotes);
+//            });
+            $.each(data.timing, function (index, d) {
                 upData.push(d.upvotes);
                 downData.push(d.downvotes);
             });

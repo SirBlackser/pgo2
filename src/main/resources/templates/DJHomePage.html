@@ -13,7 +13,8 @@
             function sendPlay(ident) {
                 //var url = "http://143.129.39.150:8080/DJAppServer_war/info/playsong";
                 var proxy = 'https://cors-anywhere.herokuapp.com/';
-                var myURL = 'https://api.myjson.com/bins/11fzpt';
+                //var myURL = 'https://api.myjson.com/bins/11fzpt';
+                var myURL = 'https://api.myjson.com/bins/1fvwjd';
                 $.ajax({
                     url: 'localhost',
                     type: 'POST',
@@ -24,35 +25,6 @@
                 });
             }
         </script>
-        <script>
-            function getGraphData(id) {
-
-                // 1) ID van json doorgeven (request)
-                var proxy = 'https://cors-anywhere.herokuapp.com/';
-                var myURL = 'https://api.myjson.com/bins/11fzpt';
-                $.ajax({
-                    url: 'localhost',
-                    type: 'GET',
-                    data: { json: JSON.stringify({
-                        'id': id
-                    })},
-                    dataType: 'json'
-                });
-
-
-
-
-
-            }
-        </script>
-        <!--<script>-->
-            <!--function goToGraphs(id) {-->
-
-                <!--// 2) url-->
-                <!--// 3) geef data door naar andere pagina-->
-
-            <!--}-->
-        <!--</script>-->
         <script type="text/javascript">
             /*<![CDATA[*/
             var songs = [];
@@ -60,7 +32,8 @@
             function getSongs() {
                 //var url = "http://143.129.39.150:8080/DJAppServer_war/info/yolo";
                 var proxy = 'https://cors-anywhere.herokuapp.com/';
-                var myURL = 'https://api.myjson.com/bins/11fzpt';
+                //var myURL = 'https://api.myjson.com/bins/11fzpt';
+                var myURL = 'https://api.myjson.com/bins/1fvwjd';
                 $.ajax({
                     url: proxy + myURL,
                     method: 'GET',
@@ -83,7 +56,7 @@
                         console.log("error");
                     }
                 }).then(function(data) {
-                    songs = data;
+                    songs = data.songs;
                     initPage();
                 });
             }
