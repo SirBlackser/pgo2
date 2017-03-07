@@ -25,10 +25,34 @@
             }
         </script>
         <script>
-            function goToGraphs(id) {
+            function getGraphData(id) {
+
+                // 1) ID van json doorgeven (request)
+                var proxy = 'https://cors-anywhere.herokuapp.com/';
+                var myURL = 'https://api.myjson.com/bins/11fzpt';
+                $.ajax({
+                    url: 'localhost',
+                    type: 'GET',
+                    data: { json: JSON.stringify({
+                        'id': id
+                    })},
+                    dataType: 'json'
+                });
+
+
+
+
 
             }
         </script>
+        <!--<script>-->
+            <!--function goToGraphs(id) {-->
+
+                <!--// 2) url-->
+                <!--// 3) geef data door naar andere pagina-->
+
+            <!--}-->
+        <!--</script>-->
         <script type="text/javascript">
             /*<![CDATA[*/
             var songs = [];
@@ -81,7 +105,8 @@
                         + "<td>" + songs[i].song + "</td>"
                         + "<td>" + songs[i].year + "</td>"
                         + "<td>" + "<button id ="+  songs[i].id + " onclick=\"sendPlay(id)\"><a><span class=\"glyphicon glyphicon-play\"></span></a></button>" + "</td>"
-                        + "<td>" + "<button id ="+ songs[i].id +" onclick=\"goToGraphs(id)\"><a><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "</td>"
+                        //+ "<td>" + "<button id ="+ songs[i].id +" onclick=\"goToGraphs(id)\"><a><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "</td>"
+                        + "<td>" + "<button id =\"Graph\{id}\"><a href=\"\Graphs\"><span class=\"glyphicon glyphicon-equalizer\"></span></a></button>" + "</td>"
                         + "</tr>";
 
 

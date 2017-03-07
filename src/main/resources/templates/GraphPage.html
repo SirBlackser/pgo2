@@ -18,27 +18,83 @@
 <input type="button" id="graph" value="show graph"/>
 <script>
     function initPage() {
-        var upData = [];
-        var downData = [];
 
-        $.ajaxSetup({cache: false});
-
-        //url parsing to get right ID of song into the json request
+        // 1) pass ID onto server.
+        var proxy = 'https://cors-anywhere.herokuapp.com/';
+        var myURL = 'https://api.myjson.com/bins/d1075';
         var url = window.location.href;
         var res = url.split("/");
-        var urlnew = "http://143.129.39.150:8080/DJAppServer_war/info/stat/"
-        var urlnew = urlnew.concat(res[res.length - 1]);
-
-        //mockup data as json request not possible yet
-        $.getJSON("https://api.myjson.com/bins/d1075", function (data) {
-
-
+        var id =  res.length -1;
+        var upData = [];
+        var downData = [];
+        $.ajax({
+            //url: localhost + id,
+            url: proxy + myURL,
+            method: 'GET',
+            cache: false,
+            /*statusCode: {
+             200: function (response) {
+             alert('200');
+             },
+             201: function (response) {
+             alert('201');
+             },
+             400: function (response) {
+             alert('400');
+             },
+             404: function (response) {
+             alert('404');
+             }
+             },*/
+            error: function() {
+                console.log("error");
+            }
+        }).then(function(data) {
             /* loop through array */
             $.each(data, function (index, d) {
                 upData.push(d.upvotes);
                 downData.push(d.downvotes);
             });
         });
+
+//        $.ajax({
+//            url: 'localhost',
+//            type: 'GET',
+//            data: { json: JSON.stringify({
+//                //'id': res.length -1
+//                'id': 1
+//            })},
+//            dataType: 'json'
+//        });
+
+        // 2) get URL from server
+
+
+        // 3) parse data from json file
+
+//        var upData = [];
+//        var downData = [];
+
+        $.ajaxSetup({cache: false});
+
+        //url parsing to get right ID of song into the json request
+        //var url = window.location.href;
+        //var res = url.split("/");
+        //var urlnew = "http://143.129.39.150:8080/DJAppServer_war/info/stat/"
+        //var urlnew = "https://api.myjson.com/bins/d1075";
+        //var urlnew = urlnew.concat(res[res.length - 1]);
+
+        //mockup data as json request not possible yet
+        //$.getJSON("https://api.myjson.com/bins/d1075", function (data) {
+//        $.getJSON(urlnew, function (data) {
+//
+//
+//            /* loop through array */
+//            $.each(data, function (index, d) {
+//                upData.push(d.upvotes);
+//                downData.push(d.downvotes);
+//            });
+//        });
         $(document).ready(function () {
             $("#graph").click(function () {
                 Highcharts.chart('container', {
