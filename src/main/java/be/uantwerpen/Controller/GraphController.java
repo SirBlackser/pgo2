@@ -2,6 +2,7 @@ package be.uantwerpen.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class GraphController {
-    @RequestMapping({"/Graphs"})
-    public String showHomepage(ModelMap model)
+    @RequestMapping({"/Graphs/{id}/"})
+    public String showHomepage(@PathVariable Long id, ModelMap model)
     {
+        //System.out.println("ID: " + id);
         return "GraphPage";
     }
 

@@ -20,20 +20,23 @@
     function initPage() {
 
         // 1) pass ID onto server.
-        // https://143.129.39.150:8080/DJAppserver_war/stats/    + ID van liedje
-        var proxy = 'https://cors-anywhere.herokuapp.com/';
-        // var myURL = 'https://api.myjson.com/bins/d1075';
-        var myURL = 'https://api.myjson.com/bins/l9sm1';
-        var url = window.location.href;
-        var res = url.split("/");
-        var id =  res.length -1;
+//        var proxy = 'https://143.129.39.154:8080/DJAppServer_war/info/stats/'    //+ ID van liedje
+//        //var proxy = 'https://cors-anywhere.herokuapp.com/';
+//        // var myURL = 'https://api.myjson.com/bins/d1075';
+//        //var myURL = 'https://api.myjson.com/bins/l9sm1';
+//        var url = window.location.href;
+//        console.log(url);
+//        var res = url.split("/");
+//        var id =  res[res.length -2];
         var upData = [];
         var downData = [];
-        $.ajax({
-            //url: localhost + id,
-            url: proxy + myURL,
-            method: 'GET',
-            cache: false,
+//        $.ajax({
+//            //url: localhost + id,
+//            //url: proxy + myURL,
+//            //url: proxy + id,
+//            url: encodeURI(proxy + id),
+//            method: 'GET',
+//            cache: true,
             /*statusCode: {
              200: function (response) {
              alert('200');
@@ -48,20 +51,19 @@
              alert('404');
              }
              },*/
-            error: function() {
-                console.log("error");
-            }
-        }).then(function(data) {
-            /* loop through array */
-//            $.each(data, function (index, d) {
+//            error: function() {
+//                console.log(status);
+//                console.log("error");
+//                console.log(url);
+//            }
+//        }).then(function(data) {
+//            /* loop through array */
+//            console.log(data);
+//            $.each(data.timing, function (index, d) {
 //                upData.push(d.upvotes);
 //                downData.push(d.downvotes);
 //            });
-            $.each(data.timing, function (index, d) {
-                upData.push(d.upvotes);
-                downData.push(d.downvotes);
-            });
-        });
+//        });
 
 //        $.ajax({
 //            url: 'localhost',
@@ -84,23 +86,23 @@
         $.ajaxSetup({cache: false});
 
         //url parsing to get right ID of song into the json request
-        //var url = window.location.href;
-        //var res = url.split("/");
-        //var urlnew = "http://143.129.39.150:8080/DJAppServer_war/info/stat/"
+        var url = window.location.href;
+        var res = url.split("/");
+        var urlnew = 'http://143.129.39.154:8080/DJAppServer_war/info/stats/'
         //var urlnew = "https://api.myjson.com/bins/d1075";
-        //var urlnew = urlnew.concat(res[res.length - 1]);
+        var urlnew = urlnew.concat(res[res.length - 2]);
 
         //mockup data as json request not possible yet
         //$.getJSON("https://api.myjson.com/bins/d1075", function (data) {
-//        $.getJSON(urlnew, function (data) {
-//
-//
-//            /* loop through array */
-//            $.each(data, function (index, d) {
-//                upData.push(d.upvotes);
-//                downData.push(d.downvotes);
-//            });
-//        });
+        $.getJSON(urlnew, function (data) {
+            console.log(data);
+
+            /* loop through array */
+            $.each(data.timing, function (index, d) {
+                upData.push(d.upvotes);
+                downData.push(d.downvotes);
+            });
+        });
         $(document).ready(function () {
             $("#graph").click(function () {
                 Highcharts.chart('container', {

@@ -34,7 +34,10 @@
 
 <script>
     function initPage() {
-        https://143.129.39.150:8080/DJAppserver_war/stats/
+  //      https://143.129.39.150:8080/DJAppserver_war/stats/
+
+
+       // info voor parser: https://www.youtube.com/watch?v=VAMz-fcDNhs
         var items = [];
 
         $(document).ready(function (e) {
@@ -42,8 +45,11 @@
                 $.ajaxSetup({cache: false});
 
                 //$.getJSON("https://api.myjson.com/bins/1cp31t", function (data) {
-                $.getJSON("https://api.myjson.com/bins/ga6k9", function (data) {
-
+                //$.getJSON("https://api.myjson.com/bins/ga6k9", function (data) {
+                var newurl = 'http://143.129.39.154:8080/DJAppServer_war/info/stats/';
+                //$.getJSON('143.129.39.154:8080/DJAppServer_war/info/stats/", function (data) {
+                $.getJSON(newurl, function (data) {
+                    console.log(data);
 
                     /* loop through array */
 //                    $.each(data, function (index, d) {
