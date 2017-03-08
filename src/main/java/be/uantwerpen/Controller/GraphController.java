@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * Created by dries on 23/02/2017.
  */
-
+@CrossOrigin
 @Controller
 public class GraphController {
     @RequestMapping({"/Graphs/{id}/"})

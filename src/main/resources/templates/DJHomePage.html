@@ -11,14 +11,11 @@
     <body onload="getSongs()">
         <script>
             function sendPlay(ident) {
-                console.log(ident);
-                var newurl = "http://143.129.39.154:8080/DJAppServer_war/info/playsong";
-                //var proxy = 'https://cors-anywhere.herokuapp.com/';
-                //var myURL = 'https://api.myjson.com/bins/11fzpt';
-                //var myURL = 'https://api.myjson.com/bins/1fvwjd';
+                var url = "143.129.39.150:8080/DJAppServer_war/play/" + ident;
+                var proxy = 'https://cors-anywhere.herokuapp.com/';
+                var myURL = 'https://api.myjson.com/bins/11fzpt';
                 $.ajax({
-                    //url: 'localhost',
-                    url: newurl,
+                    url: url,
                     type: 'POST',
                     data: { json: JSON.stringify({
                         'id': ident

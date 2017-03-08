@@ -3,6 +3,7 @@ package be.uantwerpen.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by dries on 23/02/2017.
  */
 
+@CrossOrigin
 @Controller
 //@RestController
 public class MusicController {
