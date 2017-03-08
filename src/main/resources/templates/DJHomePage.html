@@ -11,14 +11,19 @@
     <body onload="getSongs()">
         <script>
             function sendPlay(ident) {
-                var url = "143.129.39.154:8080/DJAppServer_war/play/" + ident;
+                var url = "http://143.129.39.154:8080/DJAppServer_war/play/" + ident;
+                console.log(url);
                 $.ajax({
                     url: url,
-                    type: 'POST',
-                    /*data: {
-                        'id': ident
-                     },
-                    dataType: 'json'*/
+                    method: 'GET',
+                    cache: false,
+                    error: function() {
+                        console.log("error");
+                    }
+                }).then(function(data) {
+                    //songs = data.songs;
+                    //initPage();
+                    console.log(data);
                 });
             }
         </script>
