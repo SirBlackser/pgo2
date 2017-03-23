@@ -11,6 +11,7 @@ import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.messaging.MessageChannel;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 @SpringBootApplication
 public class MqttJavaApplication {
@@ -27,8 +28,8 @@ public class MqttJavaApplication {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         //factory.setServerURIs("tcp://host1:1883", "tcp://host2:1883");
-        factory.setUserName("username");
-        factory.setPassword("password");
+        factory.setUserName("MRB");
+        factory.setPassword("pgo3");
         return factory;
     }
 
