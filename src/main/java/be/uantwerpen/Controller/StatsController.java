@@ -5,6 +5,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Revil on 01/03/2017.
  */
@@ -12,9 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 //@RestController
 public class StatsController {
+    BlackListController blackListController = new BlackListController();
+
     @RequestMapping({"/Stats"})
-    public String showHomepage(ModelMap model)
+    public String showHomepage(ModelMap model, HttpServletRequest request)
     {
-        return "StatsPage";
+        blackListController.updateBlacklist(request, 2);
+        if(blackListController.checkBlackList(request))
+        {
+            return "shame";
+        } else {
+            return "StatsPage";
+        }
     }
 }
