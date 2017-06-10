@@ -52,7 +52,8 @@ public class BlackListController {
                     System.out.println("add to blacklist: " + ip);
                 }
             } else {
-                if (blackList.contains(ip)) {
+                //60 second time out
+                if (blackList.contains(ip) && timeStamp-IpList.get(ip).get(0) > 60000) {
                     blackList.remove(ip);
                     System.out.println("remove from blacklist: " + ip);
                 }
